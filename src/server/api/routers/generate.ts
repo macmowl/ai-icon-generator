@@ -10,6 +10,8 @@ import { env } from "@/env.mjs";
 import { b64Image } from "@/data/b64Image";
 import AWS from 'aws-sdk';
 
+const BUCKET_NAME = 'icon-generator-alan'
+
 const s3 = new AWS.S3({
   credentials: {
     accessKeyId: env.ACCESS_KEY_ID,
@@ -74,14 +76,14 @@ export const generateRouter = createTRPCRouter({
     })
   
     await s3.putObject({
-      Bucket: 'icon-generator-alan',
+      Bucket: BUCKET_NAME,
       Body: Buffer.from(base64EncodedImage!, "base64"),
       Key: icon.id,
       ContentEncoding: "base64",
       ContentType: "image/gif"
     }).promise()
     return {
-      imageUrl: base64EncodedImage
+      imageUrl: `https://${BUCKET_NAME}.s3.eu-west-3.amazonaws.com/${icon.id}`
     }
   })
 

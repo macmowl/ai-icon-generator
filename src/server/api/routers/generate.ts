@@ -35,9 +35,6 @@ const generateIcon = async (prompt:string):Promise<string|undefined> => {
       size: "512x512",
       response_format: 'b64_json'
     });
-    console.log('--------')
-    console.log(response.data.data[0]?.b64_json)
-    console.log('--------')
     return response.data.data[0]?.b64_json
   }
 }

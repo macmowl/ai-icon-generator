@@ -21,6 +21,7 @@
     "@trpc/server": "^10.9.0",
     "@uploadthing/react": "^2.0.1",
     "aws-sdk": "^2.1373.0",
+    "clsx": "^1.2.1",
     "micro": "^10.0.1",
     "next": "^13.2.1",
     "next-auth": "^4.19.0",

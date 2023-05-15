@@ -1,9 +1,11 @@
 import Button from "./Button";
 import PrimaryLink from "./PrimaryLink";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useBuyCredits } from "@/hooks/useBuyCredits";
 
 const Header = () => {
   const session = useSession();
+  const { buyCredits } = useBuyCredits();
 
   const isLoggedIn = !!session.data;
   return (
@@ -18,29 +20,36 @@ const Header = () => {
           </ul>
         </nav>
         <ul>
-          {isLoggedIn && (
-            <li className="flex gap-2">
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  signOut().catch(console.error);
-                }}
-              >
-                Logout
-              </Button>
-            </li>
-          )}
-          {!isLoggedIn && (
-            <li className="flex gap-2">
+          <li>
+            {isLoggedIn ? (
+              <div className="flex gap-2">
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    buyCredits().catch(console.error);
+                  }}
+                >
+                  Buy Credits
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    signOut().catch(console.error);
+                  }}
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
               <Button
                 onClick={() => {
                   signIn().catch(console.error);
                 }}
               >
-                Logout
+                Login
               </Button>
-            </li>
-          )}
+            )}
+          </li>
         </ul>
       </div>
     </header>

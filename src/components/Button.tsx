@@ -11,7 +11,10 @@ const Button = (
       ? "bg-blue-400 hover:bg-blue-500"
       : "bg-gray-400 hover:bg-gray-500";
   return (
-    <button className={clsx("rounded px-4 py-2", variant)} {...props}>
+    <button
+      className={clsx("cursor-pointer rounded px-4 py-2", variant)}
+      {...props}
+    >
       {props.children}
     </button>
   );
